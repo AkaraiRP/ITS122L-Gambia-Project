@@ -3,19 +3,6 @@
         <link rel="stylesheet" href="styles/homepage.css">
     </head>
     <body>
-        Hello World!
-        <button>
-            <a href="Emil.php">Emil</a>
-        </button>
-        <button>
-            <a href="Viann.php">Viann</a>
-        </button>
-        <button>
-            <a href="Bryan.php">Bryan</a>
-        </button>
-        <button>
-            <a href="Brazen.php">Brazen</a>
-        </button>
         <div class="header">
             <div class="about">About</div>
             <div class="branches">Branches</div>
