@@ -1,0 +1,134 @@
+.hidden {
+    opacity: 0;
+    filter: blur(3px);
+    transition: all 500ms;
+}
+
+@media(prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
+}
+
+.show {
+    filter: blur(0);
+    opacity: 1;
+}
+
+.branches-container.hidden {
+    transform: translateX(-50%);
+}
+
+.branches-container.show {
+    transform: translateX(0);
+}
+
+.branch-column.hidden {
+    transform: translateX(-50%);
+}
+
+.branch-column.show {
+    transition-delay: calc(100ms * var(--order));
+    transform: translateX(0);
+}
+
+.section-subtitle.hidden {
+    transform: translateY(-50%);
+}
+
+.section-subtitle.show {
+    transform: translateY(0);
+}
+
+.section-title.hidden {
+    transform: translateY(-50%);
+}
+
+.section-title.show {
+    transform: translateY(0);
+}
+
+.section-text.hidden {
+    transform: translateY(-5%);
+}
+
+.section-text.show {
+    transform: translateY(0);
+}
+
+.divider.hidden {
+    transform: translateY(-50%);
+}
+
+.divider.show {
+    transform: translateY(0);
+}
+
+.mission-box.hidden {
+    transform: translateX(70%);
+}
+
+.mission-box.show {
+    transform: translateX(0);
+}
+
+.mission-description.hidden {
+    transform: translateX(70%);
+}
+
+.mission-description.show {
+    transform: translateX(0);
+}
+
+.system-box.hidden {
+    transform: translateX(-70%);
+}
+
+.system-box.show {
+    transform: translateX(0);
+}
+
+.system-description.hidden {
+    transform: translateX(-70%);
+}
+
+.system-description.show {
+    transform: translateX(0);
+}
+
+.motto.hidden {
+    transition-delay: 800ms;
+}
+
+.homepage-text.hidden {
+    transform: translateY(-50%);
+}
+
+.homepage-text.show {
+    transform: translateY(0);
+}
+
+.upcoming-section .upcoming-title.hidden {
+    transform: translateY(-50%);
+}
+
+.upcoming-section .upcoming-title.show {
+    transform: translateY(0);
+}
+
+.featured.hidden {
+    transform: translateY(50%);
+}
+
+.featured.show {
+    transform: translateY(0);
+}
+
+.upcoming.hidden {
+    transition-delay: 100ms;
+    transform: translateY(50%);
+}
+
+.upcoming.show {
+    transform: translateY(0);
+}
