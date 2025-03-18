@@ -1,19 +1,4 @@
-.hidden {
-    opacity: 0;
-    filter: blur(3px);
-    transition: all 500ms;
-}
-
-@media(prefers-reduced-motion) {
-    .hidden {
-        transition: none;
-    }
-}
-
-.show {
-    filter: blur(0);
-    opacity: 1;
-}
+@import url('default-anim.css');
 
 .branches-container.hidden {
     transform: translateX(-50%);

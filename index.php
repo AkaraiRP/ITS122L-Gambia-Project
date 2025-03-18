@@ -16,8 +16,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Comfortaa:wght@300..700&family=Exo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/d2133a2405.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/resources/icons/site.ico">
     <!-- Javascript -->
     <script defer src="scripts/js/homepage-observer.js"></script>
+    <script defer src="scripts/js/default.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -33,13 +35,24 @@
         </div>
         
         <div class="nav-links">
-            <a href="#about">About</a>
+            <a href="#about">About Us</a>
             <a href="#history">History</a>
-            <a href="#mission">Mission</a>
-            <a href="#system">System</a>
+            <a href="#mission">Mission & Vision</a>
+            <a href="#system">System & Oath</a>
             <a href="#branches">Branches</a>
-            <a href="#contact">Contact Us</a>
-            <button class="menu-button">Menu ☰</button>
+            <a href="#contacts">Contact Us</a>
+            <div class="menu-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="nav-menu">
+            <ul>
+                <li><span></span><a href="/Dashboard/">Membership Portal</a></li>
+                <li><span></span><a href="/Gallery/Blackbelt-Gallery.php">Blackbelt Gallery</a></li>
+                <li><span></span><a href="/Events/">Events</a></li>
+            </ul>
         </div>
     </nav>
     
@@ -48,7 +61,7 @@
             <h2>FIGHT THE GOOD</h2>
             <h2>FIGHT OF FAITH</h2>
         </div>
-        <button class="cta-button">JOIN NOW</button>
+        <button class="cta-button" onclick="location.href='/Dashboard/index.php'" type="button">JOIN NOW</button>
     </section>
     
     <section id="about" class="section">
@@ -214,12 +227,12 @@
                 ?>
             </div>
         </div>
-        <button class="history">View Previous Events</button>
+        <button class="history" onclick="location.href='/Events/'" type="button">View Other Events</button>
     </section>
     
     <!-- Footer with Contact Info -->
     <footer>
-        <div class="contacts">
+        <div class="contacts" id="contacts">
             <h2>CONTACT INFORMATION</h2>
             <ul>
                 <li><a href="https://www.facebook.com/profile.php?id=61571502474004"><i class="fa-brands fa-square-facebook"></i> Toughguys Global Ministry - Sentou Karate</a></li>
@@ -228,12 +241,13 @@
             </ul>
         </div>
         <div class="links">
+            <h2>QUICK LINKS</h2>
             <ul>
                 <li><a href="#about">About Us</a></li>
-                <li><a href="#branches">branches</a></li>
-                <li><a href="">Events</a></li>
-                <li><a href="">Membership Portal</a></li>
-                <li><a href=""></a>Gallery</li>
+                <li><a href="#branches">Branches</a></li>
+                <li><a href="/Events/">Events</a></li>
+                <li><a href="/Dashboard/">Membership Portal</a></li>
+                <li><a href="/Gallery/Blackbelt-Gallery.php">Blackbelt Gallery</a></li>
             </ul>
         </div>
         <div class="info">
@@ -246,19 +260,5 @@
             <p style="margin-top: 10px;">FIGHT THE GOOD, FIGHT OF FAITH.</p>
         </div>
     </footer>
-
-    <script>
-        // Simple scroll animation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth',
-                    block: "end",
-                    inline: "nearest"
-                });
-            });
-        });
-    </script>
 </body>
 </html>

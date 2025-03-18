@@ -1,5 +1,5 @@
 <?php
-    $file = "login.txt";
+    $file = getcwd() . "/login.txt";
     $file_info = file($file);
 
     function sanitize($str) {
