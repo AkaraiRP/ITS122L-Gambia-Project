@@ -1,0 +1,256 @@
+@import url('default.css');
+
+:root {
+    --white: #fff;
+}
+
+.register {
+    width: 400px;
+    height: 500px;
+    background-color: #211f21;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.user-account {
+    position: relative;
+    margin: 0 auto;
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.motto {
+    width: 250px;
+    height: 500px;
+    background-color: #62080b;
+    background-image: url("../resources/images/pattern3.png");
+    background-blend-mode: luminosity;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.motto.register {
+    width: 250px;
+    height: 600px;
+    background-color: #62080b;
+    background-image: url("../resources/images/pattern3.png");
+    background-blend-mode: luminosity;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.motto p {
+    text-align: center;
+    font-size: 3em;
+    text-transform: uppercase;
+    font-family: 'Times New Roman', Times, serif;
+    letter-spacing: 0.25cm;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.headers {
+    position: absolute;
+    top: 7%;
+    left: 20%;
+}
+
+.headers h2 {
+    font-size: 20px;
+    color: white;
+}
+
+.divider {
+    width: 152%;
+    border: none;
+    background-color: #a13632;
+    height: 3px;
+}
+
+.headers .selection {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.headers .selection h2 {
+    cursor: pointer;
+}
+
+.login {
+    width: 400px;
+    height: 500px;
+    background-color: #211f21;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.register {
+    width: 400px;
+    height: 600px;
+    background-color: #211f21;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register.hide {
+    display: none;
+}
+
+.login.hide {
+    display: none;
+}
+
+form{
+    margin:0 2rem;
+}
+.form-title{
+    font-size:1.5rem;
+    font-weight:700;
+    text-align:center;
+    padding:1.3rem;
+    margin-bottom:0.3rem;
+}
+
+.title {
+    font-size: 20px;
+}
+
+input{
+    flex:10;
+    color:inherit;
+    width:100%;
+    background-color:transparent;
+    border:none;
+    font-size:15px;
+    padding:0 0.4em;
+    border-left:solid 1px rgba(255, 255, 255, 0.36)
+}
+input:focus{
+    border-left:solid 1px var(--white);
+
+}
+.input-group{
+    padding: 0;
+    position:relative;
+    background-color:hsla(227, 63%, 18%, 0.07);
+    border: solid 2px rgba(255, 255, 255, 0.36);
+    margin-bottom: 2em;
+    border-radius:12px;
+    display:flex;
+    padding:0.7em 0.1em;
+}
+.error{
+    position:absolute;
+    left:2em;
+    bottom:-1em;
+}
+.error p{
+    color:red;
+    font-weight:500;
+    text-align:center;
+    font-size:14px;
+}
+.input-group:focus-within{
+    border:1.5px solid var(--white);
+
+}
+.input-group i{
+    flex:1;
+    color:rgb(255, 255, 255, 0.36);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.input-group:focus-within i{
+    color: var(--white);
+}
+.input-group.password i:first-child{
+    flex:1.1;
+}
+input:focus{
+    outline:none;
+}
+
+.login span {
+    height: 5px;
+    width: 59.44px;
+    background-color: #a13632;
+    border-radius: 5px;
+    position: absolute;
+    top: 81%;
+    left: 0%;
+}
+
+.register span {
+    height: 5px;
+    width: 88.03px;
+    background-color: #a13632;
+    border-radius: 5px;
+    position: absolute;
+    top: 81%;
+    left: 48%;
+}
+
+.forgot {
+    margin-top: 5px;
+}
+
+.forgot a {
+    text-decoration: none;
+    color: #ffffffa5;
+    font-size: 14px;
+}
+
+.btn{
+    font-size:1.1rem;
+    padding:0.6em 0;
+    border-radius:10px;
+    outline:none;
+    border:none;
+    width:100%;
+    background: #910b0b;
+    color:white;
+    cursor:pointer;
+    transition:0.9s;
+    margin-top:0.4em;
+    font-weight:600;
+}
+.btn:hover{
+    background:#611313;
+    color:white;
+}
+
+.links{
+    display:flex;
+    justify-content:space-around;
+    padding:0 4rem;
+    margin-top:0.9rem;
+    font-weight:bold;
+}
+
+.error-main{
+    background-color: brown;
+    padding: 0.5em 1em;
+    border-radius: 12px;
+    width: 80%;
+    margin: 0 auto;
+    position: absolute;
+    top: 14%;
+}
+.error-main p{
+    color:white;
+    text-align:center;
+}

@@ -1,13 +1,13 @@
-
 <?php
     session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOUGHGUYS | Events</title>
+    <title>TOUGHGUYS | Dashboard</title>
     <!-- CSS  -->
     <link rel="stylesheet" href="/styles/events.css">
     <!-- Fonts  -->
@@ -18,6 +18,7 @@
     <script src="https://kit.fontawesome.com/d2133a2405.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/resources/icons/site.ico">
     <!-- Javascript -->
+    <script defer src="/scripts/js/homepage-observer.js"></script>
     <script defer src="/scripts/js/default.js"></script>
 </head>
 <body>
@@ -28,18 +29,18 @@
                 <h2>Global Ministry</h2>
             </div>
             <div class="logo-icons">
-                <img src="/resources/icons/tg-icon.png" alt="Toughguys Logo" width="128px" height="128px">
-                <img src="/resources/icons/tg-icon2.png" alt="Sentou Karate" width="128px" height="128px">
+                <img src="resources/icons/tg-icon.png" alt="Toughguys Logo" width="128px" height="128px">
+                <img src="resources/icons/tg-icon2.png" alt="Sentou Karate" width="128px" height="128px">
             </div>
         </div>
         
         <div class="nav-links">
-            <a href="/#about">About Us</a>
-            <a href="/#history">History</a>
-            <a href="/#mission">Mission & Vision</a>
-            <a href="/#system">System & Oath</a>
-            <a href="/#branches">Branches</a>
-            <a href="/#contacts">Contact Us</a>
+            <a href="#about">About Us</a>
+            <a href="#history">History</a>
+            <a href="#mission">Mission & Vision</a>
+            <a href="#system">System & Oath</a>
+            <a href="#branches">Branches</a>
+            <a href="#contacts">Contact Us</a>
             <div class="menu-button">
                 <span></span>
                 <span></span>
@@ -59,50 +60,18 @@
             </ul>
         </div>
     </nav>
-    
-    <section class="events">
-        <div class="header">
-            <h2 class="title">PAST EVENTS</h2>
-            <p class="subtitle">TOUGHGUYS GLOBAL MINISTRY</p>
-            <hr class="divider">
-        </div>
-        <div class="columns">
-            <?php
-                include '../scripts/php/database.php';
 
-                $stmt =  $conn -> query("SELECT * FROM EVENTS WHERE date <= Now() ORDER BY Date DESC;");
-                $i = 0;
-                while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
-                    if ($i == 0) {
-                        echo "<div class='row'>";
-                    }
-                    elseif ($i == 2) {
-                        echo "</div>";
-                        $i = 0;
-                        continue;
-                    }
-                    echo "<div class ='entry'>";
-                    $img = "/resources/icons/tg-icon2.png";
-                    if(is_null(!$row['img'])) {
-                        $img = $row['img'];
-                    }
-                    $date = strtotime($row['date']);
-                    $date = date('F d, Y', $date);
+    <section class="dashboard">
+        <?php
+            include '../scripts/php/checkAdmin.php';
+            include '../scripts/php/database.php';
 
-                    echo "<h2 class='event-title'>{$row['event_name']}</h2>";
-                    echo "<img src='{$img}' width='440px' height='300px'>";
-                    echo "<p class='event-location'>{$row['location']}</p>";
-                    echo "<p class='event-date'>{$date}</p>";
-                    echo "</div>";
-
-                    $i++;
-                }
-                if ($i < 2 && $i != 0) {
-                    echo "</div>";
-                }
-            ?>
-        </div>
+            if(checkAdmin($conn, $_SESSION['user']['id'])) {
+                echo "<h1>Hello Admin" . $_SESSION['user']['name'] . " </h1>";
+            }
+        ?>
     </section>
+    
     
     <!-- Footer with Contact Info -->
     <footer>

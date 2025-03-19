@@ -1,21 +1,20 @@
 <?php
-    $file = getcwd() . "/login.txt";
-    $file_info = file($file);
-
-    function sanitize($str) {
-        $str = str_replace( array( "\r", "\r\n", "\n" ), '', $str );
-        return $str;
-    }
-
-    $db_server = sanitize($file_info[0]);
-    $db_user = sanitize($file_info[1]);
-    $db_pass = sanitize($file_info[2]);
-    $db_name = sanitize($file_info[3]);
-
+    include 'get-login.php';
+    
     $conn = "";
 
-    $conn = mysqli_connect($db_server, $db_user,
-                            $db_pass, $db_name) or die("Unable to connect!");
+    $conn = new PDO("mysql:host=$db_server;dbname=$db_name",
+                        $db_user, $db_pass) or die("Unable to connect!");
 
-    
+
+    function clearStoredResults(){
+        global $conn;
+
+        do {
+                if ($res = $conn->store_result()) {
+                $res->free();
+                }
+        } while ($conn->more_results() && $conn->next_result());        
+        
+    }
 ?>

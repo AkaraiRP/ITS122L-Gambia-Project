@@ -1,11 +1,14 @@
 
+<?php
+    ob_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOUGHGUYS | Gallery</title>
+    <title>TOUGHGUYS | Blackbelts</title>
     <!-- CSS  -->
     <link rel="stylesheet" href="/styles/events.css">
     <!-- Fonts  -->
@@ -16,7 +19,6 @@
     <script src="https://kit.fontawesome.com/d2133a2405.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/resources/icons/site.ico">
     <!-- Javascript -->
-    <script defer src="/scripts/js/homepage-observer.js"></script>
     <script defer src="/scripts/js/default.js"></script>
 </head>
 <body>
@@ -38,7 +40,7 @@
             <a href="/#mission">Mission & Vision</a>
             <a href="/#system">System & Oath</a>
             <a href="/#branches">Branches</a>
-            <a href="#contacts">Contact Us</a>
+            <a href="/#contacts">Contact Us</a>
             <div class="menu-button">
                 <span></span>
                 <span></span>
@@ -48,12 +50,59 @@
         <div class="nav-menu">
             <ul>
                 <li><span></span><a href="/Dashboard/">Membership Portal</a></li>
-                <li><span></span><a href="/Gallery/Blackbelt-Gallery.php">Blackbelt Gallery</a></li>
+                <li><span></span><a href="/#">Blackbelt Gallery</a></li>
                 <li><span></span><a href="/Events/">Events</a></li>
+                <?php
+                    if (isset($_SESSION['user'])) {
+                        echo "<li><span></span><a href='/logout.php'>Logout</a></li>";
+                    }
+                ?>
             </ul>
         </div>
     </nav>
     
+    <section class="gallery">
+        <div class="header">
+            <h2 class="title">BLACKBELT GALLERY</h2>
+            <p class="subtitle">TOUGHGUYS GLOBAL MINISTRY</p>
+            <hr class="divider">
+        </div>
+        <div class="columns">
+            <?php
+                include '../scripts/php/database.php';
+
+                $stmt =  $conn -> query("SELECT * FROM BLACKBELTS");
+                $i = 0;
+                while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+                    if ($i == 0) {
+                        echo "<div class='row'>";
+                    }
+                    elseif ($i == 3) {
+                        echo "</div>";
+                        $i = -1;
+                    }
+                    echo "<div class ='entry'>";
+                    $img = "/resources/icons/tg-icon2.png";
+                    if(empty(!$row['img'])) {
+                        $img = $row['img'];
+                    }
+                    if (empty(!$row['flair'])) {
+                        echo "<h2 class='flair'>{$row['flair']}</h2>";
+                    }
+                    echo "<img src='{$img}' width='440px' height='300px'>";
+                    echo "<p class='name'>{$row['name']}</p>";
+                    echo "<p class='title'>{$row['title']}</p>";
+                    echo "<p class='belt'>{$belt}</p>";
+                    echo "</div>";
+
+                    $i++;
+                }
+                if ($i < 3) {
+                    echo "</div>";
+                }
+            ?>
+        </div>
+    </section>
     
     <!-- Footer with Contact Info -->
     <footer>
@@ -72,7 +121,7 @@
                 <li><a href="/#branches">Branches</a></li>
                 <li><a href="/Events/">Events</a></li>
                 <li><a href="/Dashboard/">Membership Portal</a></li>
-                <li><a href="/Gallery/Blackbelt-Gallery.php">Blackbelt Gallery</a></li>
+                <li><a href="/#">Blackbelt Gallery</a></li>
             </ul>
         </div>
         <div class="info">

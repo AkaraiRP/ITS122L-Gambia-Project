@@ -1,5 +1,6 @@
 <?php
-    require_once 'scripts/php/database.php'
+    require_once 'scripts/php/database.php';
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +53,11 @@
                 <li><span></span><a href="/Dashboard/">Membership Portal</a></li>
                 <li><span></span><a href="/Gallery/Blackbelt-Gallery.php">Blackbelt Gallery</a></li>
                 <li><span></span><a href="/Events/">Events</a></li>
+                <?php
+                    if (isset($_SESSION['user'])) {
+                        echo "<li><span></span><a href='/logout.php'>Logout</a></li>";
+                    }
+                ?>
             </ul>
         </div>
     </nav>
@@ -178,10 +184,8 @@
         <div class="events-container">
             <div class="featured hidden">
                 <?php
-                    $req = "SELECT * FROM EVENTS WHERE date >= Now() ORDER BY Date ASC LIMIT 1;";
-                    $result = mysqli_query($conn, $req) or die ("Bad Query: $req");
-
-                    if($row = mysqli_fetch_assoc($result)) {
+                    $stmt =  $conn -> query("SELECT * FROM EVENTS WHERE date >= Now() ORDER BY Date ASC LIMIT 1");
+                    if($row = $stmt -> fetch()) {
                         $img = "resources/icons/tg-icon2.png";
                         if(is_null(!$row['img'])) {
                             $img = $row['img'];
@@ -202,11 +206,10 @@
                 <h2 class="upcoming-title">UPCOMING EVENTS</h2>
                 <hr class="divider">
                 <?php
-                    $req = "SELECT * FROM EVENTS WHERE date >= Now() ORDER BY Date ASC LIMIT 4;";
-                    $result = mysqli_query($conn, $req) or die ("Bad Query: $req");
+                    $stmt = $conn -> query("SELECT * FROM EVENTS WHERE date >= Now() ORDER BY Date ASC LIMIT 4");
 
                     $i = 0;
-                    while ($row = mysqli_fetch_assoc($result)) {
+                    while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
                         if ($i = 0) {}
                         else {
                             $date = strtotime($row['date']);
