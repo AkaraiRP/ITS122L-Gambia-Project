@@ -76,7 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             'email' => $user['email'],
             'name'=>$user['name'],
             'created_at' => $user['created_at'],
-            'contact_number' => $user['contact_number']
+            'contact_number' => $user['contact_number'],
+            'belts' => $user['belts'],
+            'pfp' => $user['pfp']
         ];
 
         header('Location: /Dashboard/home.php');

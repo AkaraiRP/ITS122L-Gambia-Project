@@ -1,0 +1,76 @@
+@import url('default.css');
+
+.dashboard {
+    position: relative;
+    background-color: #211f21;
+    width: 65%;
+    padding: 50px;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-radius: 25px;
+    height: 700px;
+
+}
+
+.dashboard .title {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+}
+
+p {
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+
+.divider {
+    left: 49px;
+    text-align: left;
+    width: 30%;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.10);
+    border: none;
+    margin-bottom: 30px;
+}
+
+.photo {
+    position: absolute;
+    top: 6%;
+    right: 6%;
+}
+
+.photo a {
+    text-decoration: none;
+    color: white;
+}
+
+.photo form {
+    justify-self: center;
+    align-items: center;
+}
+
+input {
+    color: black;
+}
+
+button {
+    color: black;
+}
+
+.photo input {
+    color: black
+}
+
+img {
+    
+    width: 300px;
+    height: 300px;
+    border-radius: 180px;
+    border: 5px solid rgba(255, 255, 255, 0.10);
+}
+
+.name {
+    margin-top: 40px;
+    font-size: 18px;
+}

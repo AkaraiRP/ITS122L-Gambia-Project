@@ -1,6 +1,13 @@
-
 <?php
-    ob_start();
+    require_once '../scripts/php/database.php';
+    session_start();
+
+    $stmt =  $conn -> prepare("SELECT * FROM admins WHERE user_id = :id");
+    $stmt -> execute(["id" => $_SESSION['user']['id']]);
+    if(!$row = $stmt -> fetch()) {
+        header("location: /Dashboard/");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -8,9 +15,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOUGHGUYS | Blackbelts</title>
+    <title>TOUGHGUYS | Dashboard</title>
     <!-- CSS  -->
-    <link rel="stylesheet" href="/styles/gallery.css">
+    <link rel="stylesheet" href="/styles/admin.css">
     <!-- Fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +47,7 @@
             <a href="/#mission">Mission & Vision</a>
             <a href="/#system">System & Oath</a>
             <a href="/#branches">Branches</a>
-            <a href="/#contacts">Contact Us</a>
+            <a href="#contacts">Contact Us</a>
             <div class="menu-button">
                 <span></span>
                 <span></span>
@@ -50,7 +57,7 @@
         <div class="nav-menu">
             <ul>
                 <li><span></span><a href="/Dashboard/">Membership Portal</a></li>
-                <li><span></span><a href="/#">Blackbelt Gallery</a></li>
+                <li><span></span><a href="/Gallery/Blackbelt-Gallery.php">Blackbelt Gallery</a></li>
                 <li><span></span><a href="/Events/">Events</a></li>
                 <?php
                     if (isset($_SESSION['user'])) {
@@ -60,49 +67,59 @@
             </ul>
         </div>
     </nav>
-    
-    <section class="gallery">
-        <div class="header">
-            <h2 class="title">BLACKBELT GALLERY</h2>
-            <p class="subtitle">TOUGHGUYS GLOBAL MINISTRY</p>
-            <hr class="divider">
+
+    <section class="dashboard">
+        <div class="forms">
+            <div class="create">
+                <form action="/scripts/php/create-event.php" method="post">
+                    <input type="text" name="event_name" value="event_name" placeholder="Event Name">
+                    <input type="text" name="location" value="location" placeholder="Event Location">
+                    <input type="text" name="date" value="date" placeholder="Event Date">
+                    <input type="text" name="event_status" value="event_status" placeholder="Status">
+                </form>
+            </div>
         </div>
-        <div class="columns">
-            <?php
-                include '../scripts/php/database.php';
-
-                $stmt =  $conn -> query("SELECT * FROM BLACKBELTS");
-                $i = 0;
-                while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
-                    if ($i == 0) {
-                        echo "<div class='row'>";
-                    }
-                    elseif ($i == 3) {
-                        echo "</div>";
-                        $i = -1;
-                    }
-                    echo "<div class ='entry'>";
-                    $img = "/resources/icons/tg-icon2.png";
-                    if(empty(!$row['img'])) {
-                        $img = "/resources/images/blackbelts/" . $row['img'];
-                    }
-                    if (empty(!$row['flair'])) {
-                        echo "<h2 class='flair'>{$row['flair']}</h2>";
-                    }
-                    echo "<img src='{$img}' width='280px' height='300px'>";
-                    echo "<p class='name'>Name: {$row['name']}</p>";
-                    echo "<p class='title'>Title: {$row['title']}</p>";
-                    echo "<p class='belt'>Belt: {$row['belt']}</p>";
-                    echo "</div>";
-
-                    $i++;
-                }
-                if ($i < 3) {
-                    echo "</div>";
-                }
-            ?>
+        <div class="headers">
+            <h2 class="title">Events Panel</h2>
+            <button onclick="window.location.href='/scripts/php/create-event.php'">Add Event</button>
+        </div>
+        <div class="container">
+            <table class="events-table">
+                <thead>
+                    <tr>
+                        <th class='event_id'>#</th>
+                        <th>Event Name</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th class='event_status'>Status</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $stmt = $conn -> query("SELECT * FROM events");
+                        while ($row = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+                            echo "<tr>";
+                            echo "<td class='event_id'>{$row['event_id']}</td>";
+                            echo "<td>{$row['event_name']}</td>";
+                            echo "<td>{$row['location']}</td>";
+                            echo "<td>{$row['date']}</td>";
+                            echo "<td>{$row['event_status']}</td>";
+                            echo "<td>{$row['img']}</td>";
+                            echo "<td class='action'>";
+                            echo '<a href="/scripts/php/update-event.php?id='. $row['event_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                            echo '<a href="/scripts/php/delete-event.php?id='. $row['event_id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                            echo '<a href="/scripts/php/upload-event.php?id='. $row['event_id'] .'" title="Add Image" data-toggle="tooltip"><span class="fa-solid fa-images"></span></a>';
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
     </section>
+    
     
     <!-- Footer with Contact Info -->
     <footer>
@@ -121,7 +138,7 @@
                 <li><a href="/#branches">Branches</a></li>
                 <li><a href="/Events/">Events</a></li>
                 <li><a href="/Dashboard/">Membership Portal</a></li>
-                <li><a href="/#">Blackbelt Gallery</a></li>
+                <li><a href="/Gallery/Blackbelt-Gallery.php">Blackbelt Gallery</a></li>
             </ul>
         </div>
         <div class="info">

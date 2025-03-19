@@ -82,9 +82,11 @@
                         continue;
                     }
                     echo "<div class ='entry'>";
-                    $img = "/resources/icons/tg-icon2.png";
-                    if(is_null(!$row['img'])) {
-                        $img = $row['img'];
+                    $img = "/resources/events/";
+                    if(!empty($row['img'])) {
+                        $img = $img . $row['img'];
+                    }   else {
+                        $img = "/resources/icons/tg-icon2.png";
                     }
                     $date = strtotime($row['date']);
                     $date = date('F d, Y', $date);

@@ -1,5 +1,7 @@
 <?php
+    require_once '../scripts/php/database.php';
     session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOUGHGUYS | Dashboard</title>
     <!-- CSS  -->
-    <link rel="stylesheet" href="/styles/events.css">
+    <link rel="stylesheet" href="/styles/user-profile.css">
     <!-- Fonts  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +20,6 @@
     <script src="https://kit.fontawesome.com/d2133a2405.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/resources/icons/site.ico">
     <!-- Javascript -->
-    <script defer src="/scripts/js/homepage-observer.js"></script>
     <script defer src="/scripts/js/default.js"></script>
 </head>
 <body>
@@ -29,17 +30,17 @@
                 <h2>Global Ministry</h2>
             </div>
             <div class="logo-icons">
-                <img src="resources/icons/tg-icon.png" alt="Toughguys Logo" width="128px" height="128px">
-                <img src="resources/icons/tg-icon2.png" alt="Sentou Karate" width="128px" height="128px">
+                <img src="/resources/icons/tg-icon.png" alt="Toughguys Logo" width="128px" height="128px">
+                <img src="/resources/icons/tg-icon2.png" alt="Sentou Karate" width="128px" height="128px">
             </div>
         </div>
         
         <div class="nav-links">
-            <a href="#about">About Us</a>
-            <a href="#history">History</a>
-            <a href="#mission">Mission & Vision</a>
-            <a href="#system">System & Oath</a>
-            <a href="#branches">Branches</a>
+            <a href="/#about">About Us</a>
+            <a href="/#history">History</a>
+            <a href="/#mission">Mission & Vision</a>
+            <a href="/#system">System & Oath</a>
+            <a href="/#branches">Branches</a>
             <a href="#contacts">Contact Us</a>
             <div class="menu-button">
                 <span></span>
@@ -53,23 +54,58 @@
                 <li><span></span><a href="/Gallery/Blackbelt-Gallery.php">Blackbelt Gallery</a></li>
                 <li><span></span><a href="/Events/">Events</a></li>
                 <?php
+                    $stmt =  $conn -> prepare("SELECT * FROM admins WHERE user_id = :id");
+                    $stmt -> execute(["id" => $_SESSION['user']['id']]);
+                    if($row = $stmt -> fetch()) {
+                        echo "<li><span></span><a href='/Dashboard/admin.php'>Admin Panel</a></li>";
+                    }
+
                     if (isset($_SESSION['user'])) {
                         echo "<li><span></span><a href='/logout.php'>Logout</a></li>";
                     }
+
                 ?>
             </ul>
         </div>
     </nav>
 
     <section class="dashboard">
-        <?php
-            include '../scripts/php/checkAdmin.php';
-            include '../scripts/php/database.php';
+        <h2 class="title">Basic Information</h2>
+        <div class="profile">
+            <?php
+                echo "<p class='name'><b>Full Name</b>: {$_SESSION['user']['name']}</p>";
+                echo "<div class='divider'></div>";
+                echo "<p class='email'><b>Email Address</b>: {$_SESSION['user']['email']}</p>";
+                echo "<div class='divider'></div>";
+                echo "<p class='contact'><b>Contact No.</b>: {$_SESSION['user']['contact_number']}</p>";
+                echo "<div class='divider'></div>";
+                echo "<p class='belt'><b>Belt</b>: {$_SESSION['user']['belts']}</p>";
+                echo "<div class='divider'></div>";
+            ?>
+            <div class="photo">
+                <?php
+                    $img = "/resources/images/profiles/";
+                    if (!empty($_SESSION['user']['pfp'])) {
+                        $img = $img . $_SESSION['user']['pfp'];
+                    }
+                    else {
+                        $img = $img . "user.png";
+                    }
 
-            if(checkAdmin($conn, $_SESSION['user']['id'])) {
-                echo "<h1>Hello Admin" . $_SESSION['user']['name'] . " </h1>";
-            }
-        ?>
+                    echo "<img src='{$img}' alt=''>";
+                ?>
+                <form action="/scripts/php/upload-pfp.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="submit" value="Upload Image" name="submit">
+                </form>
+                
+            </div>
+            
+            <p class="achievements-subtitle"><b>Achievements</b>:</p>
+            <ul>
+
+            </ul>
+        </div>
     </section>
     
     
