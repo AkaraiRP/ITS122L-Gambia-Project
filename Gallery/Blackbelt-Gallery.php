@@ -53,6 +53,13 @@
                 <li><span></span><a href="/#">Blackbelt Gallery</a></li>
                 <li><span></span><a href="/Events/">Events</a></li>
                 <?php
+                    if(isset($_SESSION['user'])) {
+                        $stmt =  $conn -> prepare("SELECT * FROM admins WHERE user_id = :id");
+                        $stmt -> execute(["id" => $_SESSION['user']['id']]);
+                        if($row = $stmt -> fetch()) {
+                            echo "<li><span></span><a href='/Dashboard/admin.php'>Admin Panel</a></li>";
+                        }
+                    }
                     if (isset($_SESSION['user'])) {
                         echo "<li><span></span><a href='/logout.php'>Logout</a></li>";
                     }

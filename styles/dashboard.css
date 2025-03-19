@@ -233,14 +233,6 @@ input:focus{
     color:white;
 }
 
-.links{
-    display:flex;
-    justify-content:space-around;
-    padding:0 4rem;
-    margin-top:0.9rem;
-    font-weight:bold;
-}
-
 .error-main{
     background-color: brown;
     padding: 0.5em 1em;

@@ -233,11 +233,11 @@ footer .links h2 {
 }
 
 footer .links ul {
-    list-style: none;
+    list-style: none !important;
 }
 
 footer .links li a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: rgba( 255, 255, 255, 0.60);
 }
 
